@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="search-container">
+    <input type="text" id="search-box" placeholder="Search for Food/Coffee...">
+    <button id="search-btn" onclick="searchCoffee()"><img src="search.jpg" height="26" width="26"></button>
+  </div>
+  <div id="card-container"></div>
+  <script>
+    const coffeeItems = [
+  { name: 'Espresso', image: 'coffe1.jpeg', price: 'Ksh 250' },
+  { name: 'Latte', image: 'coffee13.jpeg', price: 'Ksh 130' },
+  { name: 'Cappuccino', image: 'coffe3.jpeg', price: 'Ksh 300' },
+  { name: 'Americano', image: 'americano.jpg', price: 'Ksh 120' },
+  { name: 'Brewed Coffee', image: 'brewed-coffee.jpg', price: 'Ksh 100' },
+  { name: 'Cold Brew', image: 'cold-brew.jpg', price: 'Ksh 110' },
+  { name: 'Drip Coffee', image: 'drip-coffee.jpg', price: 'Ksh 120' },
+  { name: 'French Press', image: 'french-press.jpg', price: 'Ksh 130' },
+  { name: 'Pour Over', image: 'pour-over.jpg', price: 'Ksh 140' },
+  { name: 'Mocha', image: 'mocha.jpg', price: 'Ksh 150' },
+  { name: 'Macchiato', image: 'macchiato.jpg', price: 'Ksh 160' },
+  { name: 'Cortado', image: 'cortado.jpg', price: 'Ksh 170' }
+];
+
+function searchCoffee(){
+const searchBox = document.querySelector('#search-box');
+const cardContainer = document.querySelector('#card-container');
+}
+searchBox.addEventListener('input', () => {
+  const query = searchBox.value.toLowerCase();
+
+  // Filter the coffee items based on the user's query
+  const filteredItems = coffeeItems.filter((item) => item.name.toLowerCase().includes(query));
+
+  // Clear the card container
+  cardContainer.innerHTML = '';
+
+  // Display the filtered coffee items
+  if (filteredItems.length > 0) {
+    filteredItems.forEach((item) => {
+      const card = document.createElement('div');
+      card.classList.add('sale__card');
+
+      const saleTag = document.createElement('div');
+      saleTag.classList.add('sale__tag');
+      saleTag.textContent = 'sale';
+      card.appendChild(saleTag);
+
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.name;
+      img.classList.add('sale__img');
+      card.appendChild(img);
+
+      const saleData = document.createElement('div');
+      saleData.classList.add('sale__data');
+
+      const saleTitle = document.createElement('h3');
+      saleTitle.classList.add('sale__title');
+      saleTitle.textContent = item.name;
+      saleData.appendChild(saleTitle);
+
+      const salePrice = document.createElement('span');
+      salePrice.classList.add('sale__price');
+      salePrice.textContent = item.price;
+      saleData.appendChild(salePrice);
+
+      card.appendChild(saleData);
+
+      const saleButton = document.createElement('a');
+      saleButton.classList.add('sale__button', 'button');
+      saleButton.textContent = 'ORDER';
+      card.appendChild(saleButton);
+
+      cardContainer.appendChild(card);
+    });
+  } else {
+    // Display a message when no coffee items are found
+    const card = document.createElement('div');
+    card.classList.add('sale__card');
+
+    const saleTag = document.createElement('div');
+    saleTag.classList.add('sale__tag');
+    saleTag.textContent = 'not found';
+    card.appendChild(saleTag);
+
+    const saleData = document.createElement('div');
+    saleData.classList.add('sale__data');
+
+    const saleTitle = document.createElement('h3');
+    saleTitle.classList.add('sale__title');
+    saleTitle.textContent = 'Sorry, we dont have that coffee.';
+    saleData.appendChild(saleTitle);
+
+    card.appendChild(saleData);
+
+    cardContainer.appendChild(card);
+  }
+});
+  </script>
+</body>
+</html>
+  <style>
+    #search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#search-box {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  color: black;
+  font-weight: bolder;
+  width:auto;
+}
+
+#search-btn {
+  border: none;
+  background-color:gray;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 0;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+  </style>
